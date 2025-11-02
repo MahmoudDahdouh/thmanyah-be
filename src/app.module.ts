@@ -19,6 +19,10 @@ import { ApiModule } from './api/api.module';
         username: config.get('DB_USERNAME'),
         password: config.get('DB_PASSWORD'),
         database: config.get('DB_NAME'),
+        autoLoadEntities: true,
+        ssl: {
+          rejectUnauthorized: false,
+        },
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
         synchronize: config.get('NODE_ENV') !== 'production',
       }),

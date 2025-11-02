@@ -1,25 +1,13 @@
-import {
-  Controller,
-  Get,
-  Query,
-  HttpException,
-  HttpStatus,
-} from '@nestjs/common';
+import { Controller, Get, Query } from '@nestjs/common';
 import { ApiService } from './api.service';
+import { SearchQueryDto } from './dto/search-query.dto';
 
 @Controller('api/v1')
 export class ApiController {
   constructor(private readonly apiService: ApiService) {}
 
   @Get('search')
-  async search(@Query('q') term: string) {
-    if (!term) {
-      throw new HttpException(
-        'Search term is required',
-        HttpStatus.BAD_REQUEST,
-      );
-    }
-
-    return this.apiService.searchAll(term);
+  async search(@Query() query: SearchQueryDto) {
+    return this.apiService.searchAll(query.q);
   }
 }
