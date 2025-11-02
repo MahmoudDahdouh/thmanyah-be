@@ -1,0 +1,1 @@
+web: npm run db:create && npm run start:prod
